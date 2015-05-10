@@ -1,4 +1,5 @@
 <?php
+error_reporting(E_ALL);
 ini_set('display_errors','On');
 include 'storedInfo.php';
 
@@ -7,37 +8,33 @@ $mysqli = new mysqli("oniddb.cws.oregonstate.edu", "gallinaj-db", $myPassword, "
 if($mysqli->connect_errno) {
 	echo "Failed to connect to MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
 }
-else {
-	echo "Connection worked!<br />";
 
-	
-}
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Add Videos</title>
+		<title>Delete Videos</title>
 	</head>
 	<body>
 		<div id="added">
-			<form action="deletevideo.php">
+			<form action="videos.php">
 				<?php
-				
-				if(!($stmt = $mysqli->prepare("SELECT id, name FROM videos WHERE id=?"))) {
-					echo "Prepare failed: (" . $stmt->errno . ") " . $stmt->error;
+				if(!($stmt = $mysqli->prepare("DELETE FROM videos WHERE id=?"))) {
+					echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 				}
 				if(!$stmt->bind_param("i", $_POST['list'])) {
-					echo "Bind failed: (" . $stmt->errno . ") " . $stmt->error;
+					echo "Bind failed: (" . $mysqli->errno . ") " . $mysqli->error;
 				}
 				if(!$stmt->execute()) {
-					echo "Execute failed: (" . $stmt->errno . ") " . $stmt->error;
+					echo "Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
 				}
-				if(!$stmt->bind_result($id, $name)) {
+/*				if(!$stmt->bind_result($id)) {
 					echo "Bind failed: (" . $stmt->errno . ") " . $stmt->error;
 				}
 				while($stmt->fetch()){
 					echo "Do you really want to delete " . $name . "?";				
-				}
+				}*/
+				echo "Row " . $_POST['list'] . " deleted.";
 				
 				
 				/*if(!($stmt = $mysqli->prepare("INSERT INTO videos(name, category, length) VALUES(?,?,?)"))) {

@@ -10,8 +10,31 @@ if($mysqli->connect_errno) {
 }
 else {
 
+	if(isset($_POST)) {
+		
+		if(($_POST['rented']) == '1') {
+			if(!($stmt = $mysqli->prepare("UPDATE videos SET rented = '0' WHERE id=?"))) {
+				echo "Prepare failed: "  . $mysqli->errno . " " . $mysqli->error;
+			}
+			if(!$stmt->bind_param("i", $_POST['id'])) {
+				echo "Bind failed: "  . $mysqli->errno . " " . $mysqli->error;
+			}
+			if(!$stmt->execute()) {
+				echo "Execute failed: "  . $mysqli->errno . " " . $mysqli->error;
+			}
+			else {
+				echo "Updated " . $stmt->affected_rows . " row to videos.";
+			}
+		}
+	}
+	else {
+		echo "Didn't pass info";
+	}
+	
+	
+/*
 
-	if(!$stmt = $mysqli->prepare("DELETE FROM videos")) {
+	if(!$stmt = $mysqli->prepare("UPDATE videos SET ")) {
 		echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 	}
 	if(!$stmt->execute()) {
@@ -19,11 +42,11 @@ else {
 	}
 	while($stmt->fetch()){
 		echo "Clearing table.";				
-		}
+	}
 	echo "<form>";
 		echo "Table cleared.";
 		echo "<p><input type=\"submit\" value=\"OK\"></p>";
-	echo "</form>";
+	echo "</form>";*/
 
 }
 ?>
