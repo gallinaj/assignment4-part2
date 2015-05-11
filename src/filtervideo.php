@@ -20,10 +20,10 @@ if($mysqli->connect_errno) {
 		<div id="Table">
 			<?php
 			echo "<table border=\"1px\">";
-				echo "<caption>Videos Filtered by " . $_POST['pickCat'] . "</caption>";
+//				echo "<caption>Videos Filtered by " . $_POST['catPick'] . "</caption>";
 				echo "<thead>";
 					echo "<th>Movie Title</th>";
-					//echo "<th>Category</th>";
+					echo "<th>Category</th>";
 					echo "<th>Length (min)</th>";
 					echo "<th>Availability</th>";
 					echo "<th>Remove from Inventory?</th>";
@@ -31,53 +31,12 @@ if($mysqli->connect_errno) {
 				echo "</thead>";
 				echo "<tbody>";
 
-					if(!($stmt = $mysqli->prepare("SELECT name, length, rented FROM videos WHERE category=?"))) {
-						echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
-					}
-					if(!$stmt->bind_param("s", $_POST['pickCat'])) {
-						echo "Bind failed: (" . $mysqli->errno . ") " . $mysqli->error;
-					}
-					if(!$stmt->execute()) {
-						echo "Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
-					}
-					if(!$stmt->bind_result($name, $length, $rented)) {
-						echo "Bind failed: (" . $mysqli->errno . ") " . $mysqli->error;
-					}
-					
-					while($stmt->fetch()) {
-						echo "<form id=\"list\" method=\"POST\" action=\"deletevideo.php\">";
-							echo "<tr>";
-							echo "<td>" . $name . "</td>";
-							echo "<td>" . $category . "</td>";
-							echo "<td>" . $length . "</td>";
-							if($rented == 1) {
-								$rentable = "Checked Out"; 
-							}
-							else {
-								$rentable = "Available";
-							}							
-							echo "<td>" . $rentable . "</td>";
-							
-							echo "<td><input type=\"submit\" value=\"Remove\"></td>";
-						echo "</form>";
-
-						echo "<form id=\"update\" method=\"POST\" action=\"updatevideo.php\">";
-							if($rented == 1) {
-								echo "<td><input type=\"submit\" value=\"Check In\"></td>";
-							}
-							else {
-								echo "<td><input type=\"submit\" value=\"Check Out\"></td>";
-							}
-							echo "</tr>"; 
-						echo "</form>";
-					}					
-/*
 					if(!($stmt = $mysqli->prepare("SELECT name, category, length, rented FROM videos WHERE category=?"))) {
 						echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 					}
-					if(!$stmt->bind_param("s", $_POST['pickCat'])) {
+					if(!$stmt->bind_param("s", $_POST['catPick'])) {
 						echo "Bind failed: (" . $mysqli->errno . ") " . $mysqli->error;
-					}					
+					}
 					if(!$stmt->execute()) {
 						echo "Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
 					}
@@ -86,8 +45,7 @@ if($mysqli->connect_errno) {
 					}
 					
 					while($stmt->fetch()) {
-						echo "<form id=\"list\" method=\"POST\" action=\"deletevideo.php\">";
-							echo "<tr>";
+						echo "<tr>";
 							echo "<td>" . $name . "</td>";
 							echo "<td>" . $category . "</td>";
 							echo "<td>" . $length . "</td>";
@@ -98,12 +56,23 @@ if($mysqli->connect_errno) {
 								$rentable = "Available";
 							}							
 							echo "<td>" . $rentable . "</td>";
+
+							echo "<form id=\"list\" method=\"POST\" action=\"deleting.php\">";
+								echo "<td><input type=\"hidden\" name=\"name\" value=\"" . $name . "\">";
+								echo "<input type=\"submit\" value=\"Remove\" name=\"deleteVideo\"></td>";
+							echo "</form>";
+
+							echo "<form id=\"update\" method=\"POST\" action=\"updatevideo.php\">";
+								if($rented == 1) {
+									echo "<td><input type=\"submit\" value=\"Check In\"></td>";
+								}
+								else {
+									echo "<td><input type=\"submit\" value=\"Check Out\"></td>";
+								}
+							echo "</tr>"; 
 						echo "</form>";
-					}*/
-					//$stmt->close();
-
+					}					
 					?>
-
 				</tbody>
 			</table>
 		<form action="videos.php">

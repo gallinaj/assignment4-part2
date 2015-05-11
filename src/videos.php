@@ -59,7 +59,7 @@ else {
 		<div id="filterVideo">
 			<form method="POST" action="filtervideo.php">
 				<fieldset>
-					<select name="pickCat">
+					<select>
 						<?php
 						$pick = array();
 						
@@ -79,11 +79,13 @@ else {
 							}
 							else {
 								$pick.array_push($pick);
-								echo "<option value=\" ". $category . " \"> " . $category . "</option>";
+								echo "<option value=\"". $category ."\">" . $category . "</option>";
 							}
 						}
-						?>
-					</select>
+						
+					echo "</select>";
+					echo "<input type=\"hidden\" name=\"catPick\" value=\"" . $category . "\">";
+					?>
 					<input type="submit" value="Filter By Category" />
 				</fieldset>
 			</form>
@@ -131,7 +133,7 @@ else {
 						</form>*/
 						
 						echo "<form id=\"list\" method=\"POST\" action=\"deleting.php\">";
-							echo "<td><input type=\"hidden\" name=\"name\" value=" . $name . ">";
+							echo "<td><input type=\"hidden\" name=\"name\" value=\"" . $name . "\">";
 							echo "<input type=\"submit\" value=\"Remove\" name=\"deleteVideo\"></td>";
 						echo "</form>";
 						

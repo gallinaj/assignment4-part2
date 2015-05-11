@@ -34,8 +34,6 @@ else {
 				else {
 					echo "Row deleted.";	
 				}
-			
-
 			?>
 				<p><input type="submit" value="OK"></p>
 			</form>
