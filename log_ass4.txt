@@ -1,0 +1,23 @@
+Start:	Wed, 6 May 2015 20:51
+End:	Wed, 6 May 2015 22:24
+Tasks:	Began working on php file. Created a table on the ONID server and an html table.
+
+Start:	Sat, 9 May 2015 08:00
+End:	Sat, 9 May 2015 10:30
+Tasks:  Watched video from CS340 class to get a better explanation of how PHP and MySQL work together.
+
+Start:	Sat, 9 May 2015 13:00
+End:	Sat, 9 May 2015 17:00
+Tasks:	Built layout for main page with html/php. The add function works and delete table. Output for the rest is sketchy. 
+
+Start:	Sat, 9 May 2015 22:30
+End:	Sun, 10 May 2015 01:30
+Tasks: Added updating page for changing the checked-in status, but actualy filtering doesn't work.
+
+Start:	Sun, 10 May 2015 07:30
+End:	Sun, 10 May 2015 11:30
+Tasks:	Got the delete function working except for one bug. Still need to get filter working correctly.
+
+Start:	Sun, 10 May 2015 21:00
+End:	Sun, 10 May 2015 23:43
+Tasks:	Final commit. I briefly had the filter working correctly, then changed something and it broke. Not sure what.
