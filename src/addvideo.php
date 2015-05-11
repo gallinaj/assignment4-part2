@@ -22,7 +22,7 @@ if($mysqli->connect_errno) {
 				if($_POST['name'] == NULL) {
 					echo "The video name is a required field.";
 				}
-				elseif(!is_numeric($_POST['length']) || $_POST['length'] < 0) {
+				elseif(!is_numeric($_POST['length']) || $_POST['length'] <= 0) {
 					echo "The value of length must be a positive integer.";
 				}
 				else {

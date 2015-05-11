@@ -126,12 +126,13 @@ else {
 						}							
 						echo "<td>" . $rentable . "</td>";
 
-/*						<form id="list" method="POST" action="deletevideo.php">
+						/*<form id="list" method="POST" action="deletevideo.php">
 							<td><input type="submit" value="Remove"></td>
 						</form>*/
 						
-						echo "<form id=\"list\" method=\"POST\" action=\"deletevideo.php\">";
-							echo "<td><input type=\"submit\" value=\"Remove\"></td>";
+						echo "<form id=\"list\" method=\"POST\" action=\"deleting.php\">";
+							echo "<td><input type=\"hidden\" name=\"name\" value=" . $name . ">";
+							echo "<input type=\"submit\" value=\"Remove\" name=\"deleteVideo\"></td>";
 						echo "</form>";
 						
 						

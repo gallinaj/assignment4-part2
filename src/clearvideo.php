@@ -20,7 +20,7 @@ else {
 	while($stmt->fetch()){
 		echo "Clearing table.";				
 		}
-	echo "<form>";
+	echo "<form action=\"videos.php\">";
 		echo "Table cleared.";
 		echo "<p><input type=\"submit\" value=\"OK\"></p>";
 	echo "</form>";

@@ -19,7 +19,20 @@ if($mysqli->connect_errno) {
 		<div id="added">
 			<form action="videos.php">
 				<?php
-				if(!($stmt = $mysqli->prepare("DELETE FROM videos WHERE id=?"))) {
+		if(isset($_POST['delete_Video'])){
+			if (!($stmt = $mysqli->prepare("DELETE FROM videos WHERE id=(?)"))) {
+				echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
+			}
+			if (!$stmt->bind_param("i", $_POST['id'])) {
+				echo "Binding parameters failed: (" . $stmt->errno . ") " . $stmt->error;
+			}
+			if (!$stmt->execute()) {
+				echo "Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
+			}
+			$stmt->close();
+		}
+				
+				/*				if(!($stmt = $mysqli->prepare("DELETE FROM videos WHERE id=?"))) {
 					echo "Prepare failed: (" . $mysqli->errno . ") " . $mysqli->error;
 				}
 				if(!$stmt->bind_param("i", $_POST['list'])) {
@@ -27,14 +40,14 @@ if($mysqli->connect_errno) {
 				}
 				if(!$stmt->execute()) {
 					echo "Execute failed: (" . $mysqli->errno . ") " . $mysqli->error;
-				}
+				}*/
 /*				if(!$stmt->bind_result($id)) {
 					echo "Bind failed: (" . $stmt->errno . ") " . $stmt->error;
 				}
 				while($stmt->fetch()){
 					echo "Do you really want to delete " . $name . "?";				
 				}*/
-				echo "Row " . $_POST['list'] . " deleted.";
+				echo "Row " . $_POST['id'] . " deleted.";
 				
 				
 				/*if(!($stmt = $mysqli->prepare("INSERT INTO videos(name, category, length) VALUES(?,?,?)"))) {
